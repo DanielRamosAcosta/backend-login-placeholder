@@ -64,7 +64,7 @@ router
 
     context.response.body = {
       status: "error",
-      code: "worng_email_or_password",
+      code: "wrong_email_or_password",
     };
     context.response.status = 401;
   })
