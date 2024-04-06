@@ -20,3 +20,9 @@ After that, you can get a list of recepies.
 GET https://backend-login-placeholder.deno.dev/api/recepies
 Authorization: Bearer YOUR_TOKEN
 ```
+
+## Deploy
+
+```
+deployctl deploy -p backend-login-placeholder --prod
+```
