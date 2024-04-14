@@ -14,6 +14,9 @@ const router = new Router();
 const RIGHT_EMAIL = "linustorvalds@gmail.com";
 const RIGHT_PASSWORD = "ilovecats";
 
+const API_TOKEN =
+  "26df07b5b7318455b8ca09f923eaae6de6eb95530743eddcfdb541df9487df9d";
+
 router
   .post("/api/users/login", async (context) => {
     const body = await context.request.body();
@@ -70,6 +73,40 @@ router
   })
   .get("/api/recepies", async (context) => {
     const jwt = context.request.headers.get("Authorization");
+
+    const apiToken = context.request.headers.get("api_token");
+
+    if (apiToken != null) {
+      if (apiToken !== API_TOKEN) {
+        context.response.body = {
+          status: "error",
+          code: "invalid_api_token",
+        };
+        context.response.status = 401;
+        return;
+      }
+
+      context.response.body = {
+        status: "sucess",
+        payload: [
+          {
+            id: "e386ba6d-b9a3-4b64-a374-f9952fa09938",
+            name: "Pizza",
+            ingredients: ["cheese", "tomato", "dough"],
+          },
+          {
+            id: "99de4b25-0fe1-47a0-86f1-18cef3b908a9",
+            name: "Pasta",
+            ingredients: ["pasta", "tomato", "cheese"],
+          },
+        ],
+      };
+      context.response.status = 200;
+
+      return;
+    }
+
+    console.log(apiToken);
 
     if (!jwt) {
       context.response.body = {
