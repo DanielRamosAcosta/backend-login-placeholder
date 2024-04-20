@@ -6,6 +6,12 @@ import {
   getNumericDate,
 } from "https://deno.land/x/djwt@v3.0.2/mod.ts";
 import { key } from "./key.ts";
+import * as Sentry from "https://deno.land/x/sentry@7.111.0/index.mjs";
+
+Sentry.init({
+  dsn: "https://3e1b91631ad8ae071d66df6a73b7c956@o4507120577740800.ingest.de.sentry.io/4507121004380240",
+  // ...
+});
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
