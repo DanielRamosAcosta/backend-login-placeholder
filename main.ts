@@ -44,6 +44,10 @@ router
 
     await sleep(randomMiliseconds);
 
+    if (result.email.match('";')) {
+      throw new Error("SQL Injection x.x");
+    }
+
     if (result.email === RIGHT_EMAIL && result.password === RIGHT_PASSWORD) {
       const jwt = await create(
         { alg: "HS512", typ: "JWT" },
